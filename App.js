@@ -1,21 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
+import React, { useState } from "react";
+import Adder from "./components/main";
+function App() {
+  const [playAgain, setPlayAgain] = useState(2);
+  const [num1, setNum1] = useState(Math.floor(Math.random() * 40));
+  const [num2, setNum2] = useState(Math.floor(Math.random() * 30));
+  const reset = () => {
+    setPlayAgain(playAgain + 7);
+    //increase difficulity each time
+    setNum1(Math.floor(Math.random() * (55 + playAgain)));
+    setNum2(Math.floor(Math.random() * (53 + playAgain)));
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Adder num1={num1} num2={num2} key={playAgain} onChange={reset}></Adder>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
